@@ -1,18 +1,17 @@
 require('dotenv').config()
 const {
     mongoose
-} = require('./database/database')
-const express = require('express')
+} = require('./database/database');
+const express = require('express');
 const morgan = require('morgan');
-const path = require('path')
-const multer = require('multer')
+const path = require('path');
+const multer = require('multer');
 const app = express();
+const cors = require('cors');
 
 // Settings
 
 app.set('port', process.env.PORT || 3000);
-
-
 
 // Middlewares
 
@@ -21,10 +20,11 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+app.use(cors());
 
 //Routes
 app.use('/api/books', require('./routes/books_routes'));
-
+app.use('/api/categories', require('./routes/categories_routes'));
 
 // Static Files
 
