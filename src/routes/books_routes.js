@@ -1,7 +1,19 @@
 const express = require('express');
 const router = express.Router();
-
 const Book = require('../models/book')
+const multer = require('multer')
+const path = require('path');
+
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+})
+
+const upload = multer({storage});
 
 router.get('/', async (req, res) => {
     const books = await Book.find();
@@ -14,6 +26,10 @@ router.get('/:id', async (req, res) => {
     res.json(book);
 })
 
+router.post('/upload', upload.single('file'), (req, res) => {
+    console.log(`Storage location is ${req.hostname}/${req.file.path}`);
+    return res.send(req.file);
+});
 
 router.post('/', async (req, res) => {
     const {

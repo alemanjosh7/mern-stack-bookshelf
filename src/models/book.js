@@ -6,6 +6,7 @@ const SchemaBook = new Schema({
     description: { type: String, required: true}, 
     author: {type: String, required: true}, 
     category: {type:String, required: true},
+    imgUrl: {type: String, required: true},
 
 },{
     timestamps: true,
