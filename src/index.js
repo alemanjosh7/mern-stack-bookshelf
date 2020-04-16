@@ -1,3 +1,5 @@
+require('dotenv').config()
+const { mongoose } = require('./database/database')
 const express = require('express')
 const morgan = require('morgan');
 const path = require('path')
