@@ -7,7 +7,8 @@ const morgan = require('morgan');
 const path = require('path');
 const multer = require('multer');
 const app = express();
-const cors = require('cors');
+const cors = require('cors')
+
 
 // Settings
 
